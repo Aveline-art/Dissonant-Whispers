@@ -1,4 +1,4 @@
 .virtualenvs
 note.txt
-
 backend/backend/secret_key.txt
+*.pyc
