@@ -1,4 +1,12 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
+
+function useDice(list) {
+    const item = list.map((i) => {
+        return useState({name: i, count: 0})
+    })
+
+    return item
+}
 
 function DiceRoller() {
   
