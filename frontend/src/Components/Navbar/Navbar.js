@@ -42,7 +42,7 @@ function Navbar() {
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Notepad
+                    NoteTaker
                   </a>
                 </li>
                 <li>
