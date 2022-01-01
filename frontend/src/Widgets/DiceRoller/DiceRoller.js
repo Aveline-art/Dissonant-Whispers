@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 function DiceRoller() {
   const dice = [
@@ -9,14 +9,9 @@ function DiceRoller() {
   return (
     <div className="container">
       <div className="row my-5">
-        <div className="col-2 btn-group-vertical">
+        <div className="btn-group-vertical">
           {dice.map((dieState, index) => {
             return <DieCounter key={index} die={dieState} />;
-          })}
-        </div>
-        <div className="col-6">
-          {dice.map((dieState, index) => {
-            return dieState[0].count;
           })}
         </div>
       </div>
@@ -26,7 +21,6 @@ function DiceRoller() {
 
 function DieCounter(props) {
   const [die, setDie] = props.die;
-
   function increment(die) {
     if (die.count < 100) {
       const copy = Object.assign({}, die);
@@ -45,30 +39,45 @@ function DieCounter(props) {
 
   return (
     <div
-      className={`btn-group ${props.className}`}
-      role="group"
-      aria-label="First group"
+      class="btn-toolbar"
+      role="toolbar"
+      aria-label="Toolbar with button groups"
     >
-      <button type="button" className="btn btn-primary col-4">
-        {die.name}
-      </button>
-      <button
-        onClick={() => increment(die)}
-        type="button"
-        className="btn btn-outline-secondary col-2"
+      <div className="btn-group me-2" role="group" aria-label="First group">
+        <button type="button" className="btn btn-primary">
+          {die.name}
+        </button>
+        <button
+          onClick={() => increment(die)}
+          type="button"
+          className="btn btn-outline-secondary"
+        >
+          +
+        </button>
+        <button
+          onClick={(e) => decrement(die)}
+          type="button"
+          className="btn btn-outline-secondary"
+        >
+          -
+        </button>
+        <button type="button" className="btn btn-outline-secondary">
+          Table
+        </button>
+      </div>
+      <div
+        className="btn-group me-2 col-2"
+        role="group"
+        aria-label="First group"
       >
-        +
-      </button>
-      <button
-        onClick={(e) => decrement(die)}
-        type="button"
-        className="btn btn-outline-secondary col-2"
-      >
-        -
-      </button>
-      <button type="button" className="btn btn-outline-secondary col-4">
-        Table
-      </button>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          value={die.count}
+          aria-label=".form-control-sm example"
+          disabled
+        ></input>
+      </div>
     </div>
   );
 }
