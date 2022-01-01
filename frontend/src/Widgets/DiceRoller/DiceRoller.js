@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 function DiceRoller() {
   const dice = [
@@ -30,8 +30,8 @@ function DiceRoller() {
 
       allRolls.push(rolls);
     }
-    setTotal(total)
-    setResults(allRolls)
+    setTotal(total);
+    setResults(allRolls);
   }
 
   return (
@@ -60,8 +60,29 @@ function DiceRoller() {
             disabled
           ></input>
         </div>
+        <div className="col">
+          <ResultsDisplay results={results} />
+        </div>
       </div>
     </div>
+  );
+}
+
+function ResultsDisplay(props) {
+  function SingleResult(props) {
+    return (
+      <div>
+        {props.result.die}: {props.result.rolls}
+      </div>
+    );
+  }
+
+  return (
+    <Fragment>
+      {props.results.map((result) => {
+        return <SingleResult result={result} />;
+      })}
+    </Fragment>
   );
 }
 
@@ -89,7 +110,11 @@ function DieCounter(props) {
       role="toolbar"
       aria-label="Toolbar with button groups"
     >
-      <div className="btn-group me-2 col-8" role="group" aria-label="First group">
+      <div
+        className="btn-group me-2 col-8"
+        role="group"
+        aria-label="First group"
+      >
         <button type="button" className="btn btn-primary col-4">
           {die.name}
         </button>
